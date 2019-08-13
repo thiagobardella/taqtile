@@ -1,4 +1,10 @@
 # taqtile
 Onboarding tasks
 
-## [Track 0] GitHub setup 
+# All-Aboard
+
+## Project's Description
+
+## Environment and tools *
+
+## Steps to run and debug *
