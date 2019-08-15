@@ -2,7 +2,7 @@
 import React from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 
-export interface Props {
+export interface HelloProps {
   name: string;
   enthusiasmLevel?: number;
 }
@@ -11,34 +11,28 @@ interface State {
   enthusiasmLevel: number;
 }
 
-export class Hello extends React.Component<Props, State> {
-  constructor(props: Props) {
+export class Hello extends React.Component<HelloProps, State> {
+  constructor(props: HelloProps) {
     super(props);
-
-    if ((props.enthusiasmLevel || 0) <= 0) {
-      //throw new Error('You could be a little more enthusiastic. :D');
-    }
 
     this.state = {
       enthusiasmLevel: props.enthusiasmLevel || 1,
     };
   }
 
-  onIncrement = () =>
+  private onIncrement = () =>
     this.setState({enthusiasmLevel: this.state.enthusiasmLevel + 1});
-  onDecrement = () => {
+  private onDecrement = () => {
     if ((this.state.enthusiasmLevel || 0) > 0)
         this.setState({enthusiasmLevel: this.state.enthusiasmLevel - 1});
-    }
-  getExclamationMarks = (numChars: number) => Array(numChars + 1).join('!');
+  }
+  private getExclamationMarks = () => Array(this.state.enthusiasmLevel + 1).join('!');
 
   render() {
     return (
       <View style={styles.root}>
         <Text style={styles.greeting}>
-          Hello{' '}
-          {this.props.name +
-            this.getExclamationMarks(this.state.enthusiasmLevel)}
+          {`Hello ${this.props.name}${this.getExclamationMarks()}`}
         </Text>
 
         <View style={styles.buttons}>
