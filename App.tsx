@@ -39,11 +39,11 @@ const App = () => {
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
           <Header />
-          {!usingHermes ? null : (
+          { usingHermes &&
             <View style={styles.engine}>
               <Text style={styles.footer}>Engine: Hermes</Text>
             </View>
-          )}
+          }
           <View style={styles.sectionContainer}>
             <Text style={styles.sectionTitle}>My Awesome Project</Text>
           </View>
