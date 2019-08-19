@@ -18,19 +18,11 @@ import {
   StatusBar,
 } from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-import {Hello} from './components/Hello';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {Button} from './components/Button';
+import {FormTextInput} from './components/FormTextInput';
 
 const App = () => {
-  const usingHermes = typeof HermesInternal === 'object' && HermesInternal !== null;
-
   return (
     <Fragment>
       <StatusBar barStyle="dark-content" />
@@ -38,18 +30,18 @@ const App = () => {
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
-          <Header />
-          { usingHermes &&
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          }
-          <View style={styles.sectionContainer}>
-            <Text style={styles.sectionTitle}>My Awesome Project</Text>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Bem vindo(a) à Taqtile!</Text>
           </View>
           <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Hello name="World" enthusiasmLevel={1} />
+            <View style={styles.container}>
+              <FormTextInput label="E-mail" />
+            </View>
+            <View style={styles.container}>
+              <FormTextInput label="Senha" />
+            </View>
+            <View style={styles.container}>
+              <Button label="Entrar"/>
             </View>
           </View>
         </ScrollView>
@@ -62,39 +54,28 @@ const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: Colors.lighter,
   },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
   body: {
     backgroundColor: Colors.white,
   },
-  sectionContainer: {
+  container: {
+    width: "100%",
+    alignItems: 'center',
+    alignSelf: 'center',
+    backgroundColor: Colors.white,
+    paddingHorizontal: 30,
+    paddingVertical: 20
+  },
+  sectionHeader: {
+    alignSelf: 'center',
     marginTop: 32,
     paddingHorizontal: 24,
   },
   sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+    fontSize: 30,
+    fontWeight: Colors.bold,
     color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
+    marginBottom: 10
+  }
 });
 
 export default App;
