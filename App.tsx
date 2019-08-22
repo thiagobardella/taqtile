@@ -1,14 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -18,19 +8,11 @@ import {
   StatusBar,
 } from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-import {Hello} from './components/Hello';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { Button } from './components/Button';
+import { FormItem } from './components/FormItem';
 
 const App = () => {
-  const usingHermes = typeof HermesInternal === 'object' && HermesInternal !== null;
-
   return (
     <Fragment>
       <StatusBar barStyle="dark-content" />
@@ -38,19 +20,13 @@ const App = () => {
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
-          <Header />
-          { usingHermes &&
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          }
-          <View style={styles.sectionContainer}>
-            <Text style={styles.sectionTitle}>My Awesome Project</Text>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Bem vindo(a) à Taqtile!</Text>
           </View>
           <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Hello name="World" enthusiasmLevel={1} />
-            </View>
+            <FormItem label="E-mail" />
+            <FormItem label="Senha" />
+            <Button label="Entrar" />
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -62,39 +38,20 @@ const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: Colors.lighter,
   },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
   body: {
     backgroundColor: Colors.white,
   },
-  sectionContainer: {
+  sectionHeader: {
+    alignSelf: 'center',
     marginTop: 32,
     paddingHorizontal: 24,
   },
   sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+    fontSize: 30,
+    fontWeight: Colors.bold,
     color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
+    marginBottom: 10
+  }
 });
 
 export default App;
