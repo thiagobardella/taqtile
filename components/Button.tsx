@@ -10,19 +10,11 @@ export interface ButtonProps {
 export class Button extends React.PureComponent<ButtonProps> {
     render() {
         return (
-<<<<<<< HEAD
             <View style={styles.wrapper}>
                 <TouchableOpacity style={styles.button} onPress={this.props.onPress}>
                     <Text style={styles.buttonText}>{this.props.label}</Text>
                 </TouchableOpacity>
             </View>
-=======
-            <TouchableOpacity 
-                style={styles.button}
-                onPress={this.props.onPress}>
-                <Text style={styles.text}>{this.props.label}</Text>
-            </TouchableOpacity>
->>>>>>> Substituting FormTextInput for FormItem
         );
     }
 }
@@ -47,11 +39,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         margin: 30
     },
-<<<<<<< HEAD
     buttonText: {
-=======
-    text: {
->>>>>>> Substituting FormTextInput for FormItem
         color: Colors.white,
         fontWeight: 'bold',
         fontSize: 20,
