@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
         color: 'blue',
         fontWeight: 'bold',
         fontSize: 20,
-        paddingVertical: 10
+        paddingVertical: 10,
+        marginLeft: 5
     },
     formItemTextInput: {
         width: '100%',
