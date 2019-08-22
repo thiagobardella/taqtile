@@ -13,7 +13,11 @@ export class FormItem extends React.PureComponent<FormItemProps> {
         return (
             <View style={styles.wrapper}>
                 <Text style={styles.formItemLabel}>{this.props.label}</Text>
+<<<<<<< HEAD
                 <TextInput onChangeText={this.props.onChangeText} style={styles.formItemTextInput} />
+=======
+                <TextInput style={styles.formItemTextInput} />
+>>>>>>> Substituting FormTextInput for FormItem
                 {this.props.error &&
                     <Text style={styles.formItemError}>{this.props.error}</Text>
                 }
@@ -47,7 +51,11 @@ const styles = StyleSheet.create({
         flex: 1,
         height: '100%',
         color: 'red'
+<<<<<<< HEAD
     }
+=======
+    },
+>>>>>>> Substituting FormTextInput for FormItem
 });
 
 export default FormItem;

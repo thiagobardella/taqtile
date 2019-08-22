@@ -3,7 +3,12 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 import { Button } from '../components/Button';
+<<<<<<< HEAD
 import { FormItem } from '../components/FormItem';
+=======
+import { FormTextInput } from '../components/FormTextInput';
+import FormItem from '../components/FormItem';
+>>>>>>> Substituting FormTextInput for FormItem
 
 export interface LoginState {
   email: string;
@@ -36,9 +41,15 @@ export class Login extends React.Component<{}, LoginState> {
     var emailRegex = new RegExp("\\w+@\\w+.com");
     this.setState({ validEmail: emailRegex.test(this.state.email) });
 
+<<<<<<< HEAD
     let regexMinLength = new RegExp(".{7,}");
     let regexAtLeastADigit = new RegExp(".*\\d.*");
     let regexAtLeastALetter = new RegExp(".*[a-zA-Z].*");
+=======
+    let regexMinLength = new RegExp("\\w{7,}");
+    let regexAtLeastADigit = new RegExp("\\D*\\d.*");
+    let regexAtLeastALetter = new RegExp("\\d*[a-zA-Z].*");
+>>>>>>> Substituting FormTextInput for FormItem
     let validPassword = regexMinLength.test(this.state.password)
       && regexAtLeastADigit.test(this.state.password)
       && regexAtLeastALetter.test(this.state.password);
