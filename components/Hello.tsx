@@ -1,4 +1,3 @@
-// components/Hello.tsx
 import React from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 
@@ -59,7 +58,6 @@ export class Hello extends React.Component<HelloProps, State> {
   }
 }
 
-// styles
 const styles = StyleSheet.create({
   root: {
     alignItems: 'center',

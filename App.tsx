@@ -1,14 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -18,9 +8,9 @@ import {
   StatusBar,
 } from 'react-native';
 
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {Button} from './components/Button';
-import {FormTextInput} from './components/FormTextInput';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { Button } from './components/Button';
+import { FormItem } from './components/FormItem';
 
 const App = () => {
   return (
@@ -34,15 +24,9 @@ const App = () => {
             <Text style={styles.sectionTitle}>Bem vindo(a) à Taqtile!</Text>
           </View>
           <View style={styles.body}>
-            <View style={styles.container}>
-              <FormTextInput label="E-mail" />
-            </View>
-            <View style={styles.container}>
-              <FormTextInput label="Senha" />
-            </View>
-            <View style={styles.container}>
-              <Button label="Entrar"/>
-            </View>
+            <FormItem label="E-mail" />
+            <FormItem label="Senha" />
+            <Button label="Entrar" />
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -56,14 +40,6 @@ const styles = StyleSheet.create({
   },
   body: {
     backgroundColor: Colors.white,
-  },
-  container: {
-    width: "100%",
-    alignItems: 'center',
-    alignSelf: 'center',
-    backgroundColor: Colors.white,
-    paddingHorizontal: 30,
-    paddingVertical: 20
   },
   sectionHeader: {
     alignSelf: 'center',
