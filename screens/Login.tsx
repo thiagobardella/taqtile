@@ -12,6 +12,12 @@ export interface LoginState {
   validPassword: boolean;
 }
 
+const PasswordMinLength = 7;
+const RegexPasswordMinLength = new RegExp(`.{${PasswordMinLength},}`);
+const RegexPasswordAtLeastADigit = new RegExp(".*\\d.*");
+const RegexPasswordAtLeastALetter = new RegExp(".*[a-zA-Z].*");
+const RegexEmailFormat = new RegExp("\\w+@\\w+.com");
+
 export class Login extends React.Component<{}, LoginState> {
   constructor(props) {
     super(props);
@@ -33,16 +39,16 @@ export class Login extends React.Component<{}, LoginState> {
   };
 
   private handleButtonPress = () => {
-    var emailRegex = new RegExp("\\w+@\\w+.com");
-    this.setState({ validEmail: emailRegex.test(this.state.email) });
+    let validEmail = RegexEmailFormat.test(this.state.email);
+    let validPassword = RegexPasswordMinLength.test(this.state.password)
+      && RegexPasswordAtLeastADigit.test(this.state.password)
+      && RegexPasswordAtLeastALetter.test(this.state.password);
 
-    let regexMinLength = new RegExp(".{7,}");
-    let regexAtLeastADigit = new RegExp(".*\\d.*");
-    let regexAtLeastALetter = new RegExp(".*[a-zA-Z].*");
-    let validPassword = regexMinLength.test(this.state.password)
-      && regexAtLeastADigit.test(this.state.password)
-      && regexAtLeastALetter.test(this.state.password);
-    this.setState({ validPassword: validPassword });
+    if (validEmail != this.state.validEmail || validPassword != this.state.validPassword)
+      this.setState({
+        validEmail: validEmail,
+        validPassword: validPassword
+      });
   };
 
   render() {
@@ -79,14 +85,6 @@ const styles = StyleSheet.create({
   },
   body: {
     backgroundColor: Colors.white,
-  },
-  container: {
-    width: '100%',
-    alignItems: 'center',
-    alignSelf: 'center',
-    backgroundColor: Colors.white,
-    paddingHorizontal: 30,
-    paddingVertical: 20
   },
   sectionHeader: {
     alignSelf: 'center',
