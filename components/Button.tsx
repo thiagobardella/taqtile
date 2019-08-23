@@ -3,14 +3,15 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 export interface ButtonProps {
-    label: String
+    label: string;
+    onPress: () => void;
 }
 
 export class Button extends React.PureComponent<ButtonProps> {
     render() {
         return (
             <View style={styles.wrapper}>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={this.props.onPress}>
                     <Text style={styles.buttonText}>{this.props.label}</Text>
                 </TouchableOpacity>
             </View>
