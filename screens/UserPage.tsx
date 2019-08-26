@@ -6,7 +6,7 @@ export class Home extends React.Component {
   render() {
     return (
       <View style={styles.sectionHeader}>
-        <Text style={styles.sectionTitle}>Home</Text>
+        <Text style={styles.sectionTitle}>Perfil</Text>
       </View>
     );
   }
