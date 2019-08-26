@@ -132,7 +132,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
       return;
     }
 
-    if (!this.state.loginNeedsValidation) this.props.navigation.navigate('UserPage');
+    if (!this.state.loginNeedsValidation) this.props.navigation.navigate('UsersPage');
 
     if (validEmail != this.state.validEmail || validPassword != this.state.validPassword || this.state.loginNeedsValidation) {
       if (validEmail && validPassword) {
@@ -156,7 +156,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
             error: undefined,
             isLoading: false
           });
-          this.props.navigation.navigate('UserPage');
+          this.props.navigation.navigate('UsersPage');
         } catch (error) {
           this.setState({
             validEmail: validEmail,
