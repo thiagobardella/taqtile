@@ -3,9 +3,10 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { StyleSheet, TextInput, Text, View } from 'react-native';
 
 export interface FormItemProps {
-    label: String;
+    label: string;
     error?: string;
     onChangeText?: (text: string) => void;
+    shouldHideText: boolean
 }
 
 export class FormItem extends React.PureComponent<FormItemProps> {
@@ -13,7 +14,7 @@ export class FormItem extends React.PureComponent<FormItemProps> {
         return (
             <View style={styles.wrapper}>
                 <Text style={styles.formItemLabel}>{this.props.label}</Text>
-                <TextInput onChangeText={this.props.onChangeText} style={styles.formItemTextInput} />
+                <TextInput secureTextEntry={this.props.shouldHideText} onChangeText={this.props.onChangeText} style={styles.formItemTextInput} />
                 {this.props.error &&
                     <Text style={styles.formItemError}>{this.props.error}</Text>
                 }
