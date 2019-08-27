@@ -8,8 +8,15 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@apollo/react-hooks": "^3.0.1",
+    "@react-native-community/async-storage": "^1.6.1",
+    "apollo-boost": "^0.4.4",
+    "graphql": "^14.5.1",
     "react": "16.8.6",
-    "react-native": "0.60.5"
+    "react-native": "0.60.5",
+    "react-native-gesture-handler": "^1.4.1",
+    "react-native-simple-navigation": "^1.2.0-re",
+    "react-navigation": "^3.12.1"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
