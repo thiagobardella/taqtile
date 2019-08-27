@@ -56,6 +56,9 @@ export class UsersPage extends React.Component<UsersPageProps, UsersPageState> {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={styles.scrollView}>
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>Lista de usuários</Text>
+        </View>
         <View style={styles.body}>
           <Spinner
             visible={this.state.isLoading}
@@ -93,6 +96,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: Colors.bold,
     color: 'gray',
+    marginBottom: 10
+  },
+  sectionHeader: {
+    alignSelf: 'center',
+    marginTop: 32,
+    paddingHorizontal: 24,
+  },
+  sectionTitle: {
+    fontSize: 30,
+    fontWeight: Colors.bold,
+    color: Colors.black,
     marginBottom: 10
   },
   wrapper: {
