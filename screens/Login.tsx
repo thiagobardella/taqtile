@@ -7,6 +7,8 @@ import { gql } from 'apollo-boost';
 
 import ApolloClient from 'apollo-boost';
 import AsyncStorage from '@react-native-community/async-storage';
+import Spinner from 'react-native-loading-spinner-overlay';
+
 
 const client = new ApolloClient({
   uri: 'https://tq-template-server-sample.herokuapp.com/graphql'
@@ -23,6 +25,7 @@ export interface LoginState {
   validPassword: boolean;
   error?: string,
   token: string;
+  isLoading: boolean,
 }
 
 const PasswordMinLength = 7;
@@ -55,7 +58,8 @@ export class Login extends React.Component<LoginProps, LoginState> {
       validEmail: true,
       validPassword: true,
       error: undefined,
-      token: ""
+      token: "",
+      isLoading: false,
     };
   }
 
@@ -123,7 +127,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
       });
       return;
     }
-
+    
     if (validEmail && validPassword) {
       let token = '';
       try {
@@ -177,6 +181,10 @@ export class Login extends React.Component<LoginProps, LoginState> {
           <Text style={styles.sectionTitle}>Bem vindo(a) à Taqtile!</Text>
         </View>
         <View style={styles.body}>
+          <Spinner
+            visible={this.state.isLoading}
+            textStyle={styles.spinnerTextStyle}
+          />
           <FormItem label="E-mail" error={emailError} onChangeText={this.handleChangeEmail} shouldHideText={false} />
           <FormItem label="Senha" error={passwordError} onChangeText={this.handleChangePassword} shouldHideText={true} />
           {this.state.error && <Text style={styles.error}>{this.state.error}</Text>}
@@ -188,6 +196,9 @@ export class Login extends React.Component<LoginProps, LoginState> {
 }
 
 const styles = StyleSheet.create({
+  spinnerTextStyle: {
+    color: '#FFF'
+  },
   scrollView: {
     backgroundColor: Colors.lighter,
   },
