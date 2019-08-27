@@ -5,13 +5,15 @@ import AsyncStorage from '@react-native-community/async-storage';
 import ApolloClient from 'apollo-boost';
 import * as ScreensConstants from './screeens.constants'
 import Spinner from 'react-native-loading-spinner-overlay';
+import { NavigationScreenProps } from 'react-navigation';
+
 
 interface UsersPageProps {
-  navigation: any;
+  navigation: NavigationScreenProps;
 }
 
 interface UsersPageState {
-  users: any,
+  users: UserInfo[],
   isLoading: boolean,
   currentPage: number,
   client: ApolloClient<unknown>,
@@ -29,9 +31,9 @@ export class UsersPage extends React.Component<UsersPageProps, UsersPageState> {
     super(props);
 
     this.state = {
-      users: "",
+      users: [],
       isLoading: false,
-      currentPage: 14,
+      currentPage: 1,
       client: new ApolloClient(),
       endReached: false
     }
@@ -135,7 +137,6 @@ export class UsersPage extends React.Component<UsersPageProps, UsersPageState> {
       </ScrollView>
     );
   }
-
 }
 
 const styles = StyleSheet.create({
