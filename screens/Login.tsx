@@ -5,14 +5,10 @@ import { Button } from '../components/Button';
 import { FormItem } from '../components/FormItem';
 import { gql } from 'apollo-boost';
 
-import ApolloClient from 'apollo-boost';
 import AsyncStorage from '@react-native-community/async-storage';
 import Spinner from 'react-native-loading-spinner-overlay';
 
-
-const client = new ApolloClient({
-  uri: 'https://tq-template-server-sample.herokuapp.com/graphql'
-});
+import * as ScreensConstants from './screeens.constants'
 
 interface LoginProps {
   navigation: any;
@@ -132,14 +128,14 @@ export class Login extends React.Component<LoginProps, LoginState> {
       return;
     }
 
-    if (!this.state.loginNeedsValidation) this.props.navigation.navigate('UsersPage');
+    if (!this.state.loginNeedsValidation) this.props.navigation.navigate('UsersPage', {token: this.state.token});
 
     if (validEmail != this.state.validEmail || validPassword != this.state.validPassword || this.state.loginNeedsValidation) {
       if (validEmail && validPassword) {
         this.setState({ isLoading: true });
         let token = '';
         try {
-          const result = await client.mutate({
+          const result = await ScreensConstants.APOLLO_CLIENT_FOR_AUTHENTICATION.mutate({
             variables: {
               loginInput: {
                 "email": this.state.email,
@@ -156,7 +152,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
             error: undefined,
             isLoading: false
           });
-          this.props.navigation.navigate('UsersPage');
+          this.props.navigation.navigate('UsersPage', {token: this.state.token});
         } catch (error) {
           this.setState({
             validEmail: validEmail,
@@ -173,7 +169,6 @@ export class Login extends React.Component<LoginProps, LoginState> {
   }
 
   render() {
-
     const emailError =
       !this.state.validEmail
         ? "Invalid email! Your email must have the format ###@###.com"
