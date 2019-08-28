@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import ApolloClient from 'apollo-boost';
 import Spinner from 'react-native-loading-spinner-overlay';
 import * as constants from './screens.constants'
+import * as graphQLconsts from './graphQL.constants'
 import * as utils from './screens.utils'
 import Button from '../components/Button';
 import { NavigationParams, NavigationScreenProp, NavigationState } from 'react-navigation';
@@ -48,9 +49,9 @@ export class UsersPage extends React.Component<UsersPageProps, UsersPageState> {
     const client = utils.APOLLO_CLIENT_AUTHENTICATED(token || '');
 
     const queryResult = await client.query({
-      query: constants.USERS_PAGINATED_QUERY,
+      query: graphQLconsts.USERS_PAGINATED_QUERY,
       variables: {
-        offset: (this.state.currentPage * constants.USERS_PAGE_LIMIT)
+        offset: (this.state.currentPage * graphQLconsts.USERS_PAGE_LIMIT)
       }
     })
 
@@ -113,14 +114,14 @@ export class UsersPage extends React.Component<UsersPageProps, UsersPageState> {
 
   private loadMoreData = async () => {
     this.setState({ isLoading: true });
-    
+
     const queryResult = await this.state.client.query({
-      query: constants.USERS_PAGINATED_QUERY,
+      query: graphQLconsts.USERS_PAGINATED_QUERY,
       variables: {
-        offset: (this.state.currentPage * constants.USERS_PAGE_LIMIT)
+        offset: (this.state.currentPage * graphQLconsts.USERS_PAGE_LIMIT)
       }
     })
-    
+
     const previousUsers = this.state.users;
     const allUsers = previousUsers.concat(queryResult.data.Users.nodes);
 

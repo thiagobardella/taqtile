@@ -7,7 +7,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import FormItemPicker from '../components/FormItemPicker';
 import { Title } from '../components/TitleText';
 
-interface UserPageState {
+interface NewUserPageState {
     id: number,
     name: string,
     cpf: string,
@@ -18,7 +18,7 @@ interface UserPageState {
     isLoading: boolean
 }
 
-export class NewUserPage extends React.Component<{}, UserPageState> {
+export class NewUserPage extends React.Component<{}, NewUserPageState> {
     constructor(props) {
         super(props);
 
@@ -50,7 +50,7 @@ export class NewUserPage extends React.Component<{}, UserPageState> {
                     <FormItemText label="CPF" onChangeText={this.handleChangeField} shouldHideText={false} />
                     <FormItemText label="Data de Nascimento" onChangeText={this.handleChangeField} shouldHideText={false} />
                     <FormItemText label="Senha" onChangeText={this.handleChangeField} shouldHideText={true} />
-                    <FormItemPicker label="Perfil" />
+                    <FormItemPicker label="Perfil" options={constants.USER_ROLES}/>
                     <Button label="Confirmar" onPress={this.handleSubmitButtonPress} />
                 </View>
             </ScrollView>
@@ -61,7 +61,7 @@ export class NewUserPage extends React.Component<{}, UserPageState> {
         //TODO (not implemented yet)
     }
 
-    private handleSubmitButtonPress() {
+    private handleSubmitButtonPress = () => {
         //TODO (not implemented yet)
     }
 }

@@ -8,6 +8,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import { NavigationParams, NavigationScreenProp, NavigationState } from 'react-navigation';
 
 import * as constants from './screens.constants'
+import * as graphQLconsts from './graphQL.constants'
 import * as utils from './screens.utils'
 import { Title } from '../components/TitleText';
 
@@ -138,14 +139,14 @@ export class Login extends React.Component<LoginProps, LoginState> {
         this.setState({ isLoading: true });
         let token = '';
         try {
-          const result = await constants.APOLLO_CLIENT_FOR_AUTHENTICATION.mutate({
+          const result = await graphQLconsts.APOLLO_CLIENT_FOR_AUTHENTICATION.mutate({
             variables: {
               loginInput: {
                 "email": this.state.email,
                 "password": this.state.password
               }
             },
-            mutation: constants.MUTATION_LOGIN_REQUEST
+            mutation: graphQLconsts.MUTATION_LOGIN_REQUEST
           });
           token = result.data.Login.token;
           this.setState({

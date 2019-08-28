@@ -1,63 +1,13 @@
-import ApolloClient from 'apollo-boost';
-import { gql } from 'apollo-boost';
 import { StyleSheet } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-
-export const GRAPHQL_SERVER = "https://tq-template-server-sample.herokuapp.com/graphql";
-
-export const APOLLO_CLIENT_FOR_AUTHENTICATION = new ApolloClient({ uri: GRAPHQL_SERVER });
-
-export const USERS_PAGE_LIMIT = 10
-
-export const USERS_PAGINATED_QUERY = gql`
-  query($offset: Int){
-    Users(offset: $offset, limit: ${USERS_PAGE_LIMIT}, orderBy: [{sort: name, direction: ASC}]) {
-      count
-      nodes {
-        id
-        name
-        email
-      }
-      pageInfo {
-        hasNextPage
-      }
-    }
-  }
-`;
-
-export const MUTATION_LOGIN_REQUEST = gql`
-  mutation($loginInput: LoginInput!) {
-      Login(data: $loginInput) 
-      {
-        user {
-          name
-          cpf
-          email
-        }
-        token
-      }
-    }
-`;
-
-export const MUTATION_CREATE_USER_REQUEST = gql`
-  mutation($loginInput: LoginInput!) {
-      Login(data: $loginInput) 
-      {
-        user {
-          name
-          cpf
-          email
-        }
-        token
-      }
-    }
-`;
 
 export const PASSWORD_MIN_LENGTH = 7;
 export const REGEX_PASSWORD_MIN_LENGTH = new RegExp(`.{${PASSWORD_MIN_LENGTH},}`);
 export const REGEX_PASSWORD_AT_LEAST_1_DIGIT = new RegExp(".*\\d.*");
 export const REGEX_PASSWORD_AT_LEAST_1_LETTER = new RegExp(".*[a-zA-Z].*");
 export const REGEX_EMAIL_FORMAT = new RegExp("\\w+@\\w+.com$");
+
+export const USER_ROLES = ["user", "admin"]
 
 export const SCREEN_STYLES = StyleSheet.create({
   spinnerTextStyle: {

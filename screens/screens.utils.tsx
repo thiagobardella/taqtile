@@ -1,7 +1,7 @@
 import ApolloClient from 'apollo-boost';
 
 import * as constants from './screens.constants'
-
+import * as graphQLconsts from './graphQL.constants'
 
 export function isValidEmail(email: string) {
     return constants.REGEX_EMAIL_FORMAT.test(email);
@@ -15,7 +15,7 @@ export function isValidPassword(password: string) {
 
 export function APOLLO_CLIENT_AUTHENTICATED(token: string) {
     return new ApolloClient({
-        uri: constants.GRAPHQL_SERVER,
+        uri: graphQLconsts.GRAPHQL_SERVER,
         request: operation => {
             operation.setContext({
                 headers: {
