@@ -1,10 +1,10 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Home from './screens/Home';
-import UserPage from './screens/UserPage';
+import UsersPage from './screens/UsersPage';
 
 const NavStack = createStackNavigator({
   Home: { screen: Home },
-  UserPage: { screen: UserPage}
+  UsersPage: { screen: UsersPage}
 });
 
 const AppNavigator = createAppContainer(NavStack);
