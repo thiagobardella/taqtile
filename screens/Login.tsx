@@ -23,7 +23,6 @@ export interface LoginState {
   password: string;
   validEmail: boolean;
   validPassword: boolean;
-  loginNeedsValidation: boolean,
   error?: string,
   token: string;
   isLoading: boolean,
@@ -58,7 +57,6 @@ export class Login extends React.Component<LoginProps, LoginState> {
       password: "",
       validEmail: true,
       validPassword: true,
-      loginNeedsValidation: false,
       error: undefined,
       token: "",
       isLoading: false,
@@ -67,11 +65,11 @@ export class Login extends React.Component<LoginProps, LoginState> {
 
   private storeToken = (token: string) => {
     AsyncStorage.setItem('token', token)
-      .then(value => this.setState({ token: token }))
+      .then((value) => this.setState({ token: token }))
       .catch(err => this.setState({
         email: "",
         password: "",
-        error: "Erro ao tentar armazenar token. Realize o login novamente"
+        error: "Ops, ocorreu um erro durante o login. Tente novamente"
       }));
   }
 
@@ -81,7 +79,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
       .catch(err => this.setState({
         email: "",
         password: "",
-        error: "Erro ao tentar recuperar token. Realize o login novamente"
+        error: "Ops, ocorreu um erro durante o login. Tente novamente"
       }));
   }
 
@@ -97,22 +95,20 @@ export class Login extends React.Component<LoginProps, LoginState> {
 
   private handleChangeEmail = (email: string) => {
     let validEmail = this.isValidEmail(email);
-    if (email != this.state.email || validEmail != this.state.validEmail) {
+    if (email !== this.state.email || validEmail !== this.state.validEmail) {
       this.setState({
         email: email,
-        validEmail: validEmail,
-        loginNeedsValidation: true
+        validEmail: validEmail
       });
     }
   };
 
   private handleChangePassword = (password: string) => {
     let validPassword = this.isValidPassword(password);
-    if (password != this.state.password || validPassword != this.state.validPassword) {
+    if (password !== this.state.password || validPassword !== this.state.validPassword) {
       this.setState({
         password: password,
-        validPassword: validPassword,
-        loginNeedsValidation: true
+        validPassword: validPassword
       });
     }
   };
@@ -131,57 +127,48 @@ export class Login extends React.Component<LoginProps, LoginState> {
       });
       return;
     }
-
-    if (!this.state.loginNeedsValidation) this.props.navigation.navigate('UsersPage');
-
-    if (validEmail != this.state.validEmail || validPassword != this.state.validPassword || this.state.loginNeedsValidation) {
-      if (validEmail && validPassword) {
-        this.setState({ isLoading: true });
-        let token = '';
-        try {
-          const result = await client.mutate({
-            variables: {
-              loginInput: {
-                "email": this.state.email,
-                "password": this.state.password
-              }
-            },
-            mutation: MutationRequest
-          });
-          token = result.data.Login.token;
-          this.setState({
-            validEmail: validEmail,
-            validPassword: validPassword,
-            loginNeedsValidation: false,
-            error: undefined,
-            isLoading: false
-          });
-          this.props.navigation.navigate('UsersPage');
-        } catch (error) {
-          this.setState({
-            validEmail: validEmail,
-            validPassword: validPassword,
-            loginNeedsValidation: true,
-            error: `${error.message}`,
-            isLoading: false
-          });
-        } finally {
-          this.storeToken(token);
-        }
+    
+    if (validEmail && validPassword) {
+      let token = '';
+      try {
+        const result = await client.mutate({
+          variables: {
+            loginInput: {
+              email: this.state.email,
+              password: this.state.password
+            }
+          },
+          mutation: MutationRequest
+        });
+        token = result.data.Login.token;
+        this.setState({
+          validEmail: validEmail,
+          validPassword: validPassword,
+          error: undefined
+        });
+        this.props.navigation.navigate('UserPage');
+        this.storeToken(token);
+      } catch (error) {
+        this.setState({
+          validEmail: validEmail,
+          validPassword: validPassword,
+          error: `${error.message}`
+        });
       }
     }
+
   }
 
   render() {
 
     const emailError =
       !this.state.validEmail
-        ? "Invalid email! Your email must have the format ###@###.com"
+        ? "E-mail inválido! O e-mail deve estar no formato ###@###.com"
         : undefined;
 
     const passwordError =
       !this.state.validPassword
-        ? "Invalid password! Your password: \n * must contain at least 7 characters \n * should have at least 1 digit and 1 letter"
+        ? "Senha inválida! Sua senha: \n * deve ter no mínimo 7 caracteres \n * e deve ter, no mínimo, 1 letra e 1 dígito"
         : undefined;
 
     this.getToken();
