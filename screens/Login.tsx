@@ -7,11 +7,13 @@ import { gql } from 'apollo-boost';
 
 import AsyncStorage from '@react-native-community/async-storage';
 import Spinner from 'react-native-loading-spinner-overlay';
+import { NavigationScreenProps } from 'react-navigation';
+
 
 import * as ScreensConstants from './screeens.constants'
 
 interface LoginProps {
-  navigation: any;
+  navigation: NavigationScreenProps;
 }
 
 export interface LoginState {
