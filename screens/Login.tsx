@@ -44,12 +44,12 @@ export class Login extends React.Component<LoginProps, LoginState> {
   render() {
     const emailError =
       !this.state.validEmail
-        ? "Invalid email! Your email must have the format ###@###.com"
+        ? "E-mail inválido! O e-mail deve estar no formato ###@###.com"
         : undefined;
 
     const passwordError =
       !this.state.validPassword
-        ? "Invalid password! Your password: \n * must contain at least 7 characters \n * should have at least 1 digit and 1 letter"
+        ? "Senha inválida! Sua senha: \n * deve ter no mínimo 7 caracteres \n * e deve ter, no mínimo, 1 letra e 1 dígito"
         : undefined;
 
     this.getToken();
@@ -127,32 +127,36 @@ export class Login extends React.Component<LoginProps, LoginState> {
       });
       return;
     }
-    
+
     if (validEmail && validPassword) {
       let token = '';
       try {
-        const result = await client.mutate({
+        this.setState({ isLoading: true });
+
+        const result = await graphQLconsts.APOLLO_CLIENT_FOR_AUTHENTICATION.mutate({
           variables: {
             loginInput: {
               email: this.state.email,
               password: this.state.password
             }
           },
-          mutation: MutationRequest
+          mutation: graphQLconsts.MUTATION_LOGIN_REQUEST
         });
         token = result.data.Login.token;
         this.setState({
           validEmail: validEmail,
           validPassword: validPassword,
-          error: undefined
+          error: undefined,
+          isLoading: false
         });
-        this.props.navigation.navigate('UserPage');
+        this.props.navigation.navigate('UsersPage');
         this.storeToken(token);
       } catch (error) {
         this.setState({
           validEmail: validEmail,
           validPassword: validPassword,
-          error: `${error.message}`
+          error: `${error.message}`,
+          isLoading: false
         });
       }
     }

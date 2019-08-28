@@ -30,25 +30,9 @@ export const MUTATION_LOGIN_REQUEST = gql`
       {
         user {
           name
-          cpf
           email
         }
         token
       }
     }
 `;
-
-export const MUTATION_CREATE_USER_REQUEST = gql`
-  mutation($loginInput: LoginInput!) {
-      Login(data: $loginInput)
-      {
-        user {
-          name
-          cpf
-          email
-        }
-        token
-      }
-    }
-`;
-
