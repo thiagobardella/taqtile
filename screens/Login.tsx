@@ -21,7 +21,6 @@ export interface LoginState {
   password: string;
   validEmail: boolean;
   validPassword: boolean;
-  loginNeedsValidation: boolean,
   error?: string,
   token: string;
   isLoading: boolean,
@@ -36,7 +35,6 @@ export class Login extends React.Component<LoginProps, LoginState> {
       password: "",
       validEmail: true,
       validPassword: true,
-      loginNeedsValidation: false,
       error: undefined,
       token: "",
       isLoading: false,
@@ -77,11 +75,11 @@ export class Login extends React.Component<LoginProps, LoginState> {
 
   private storeToken = (token: string) => {
     AsyncStorage.setItem('token', token)
-      .then(value => this.setState({ token: token }))
+      .then((value) => this.setState({ token: token }))
       .catch(err => this.setState({
         email: "",
         password: "",
-        error: "Erro ao tentar armazenar token. Realize o login novamente"
+        error: "Ops, ocorreu um erro durante o login. Tente novamente"
       }));
   }
 
@@ -91,7 +89,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
       .catch(err => this.setState({
         email: "",
         password: "",
-        error: "Erro ao tentar recuperar token. Realize o login novamente"
+        error: "Ops, ocorreu um erro durante o login. Tente novamente"
       }));
   }
 
@@ -100,8 +98,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
     if (email != this.state.email || validEmail != this.state.validEmail) {
       this.setState({
         email: email,
-        validEmail: validEmail,
-        loginNeedsValidation: true
+        validEmail: validEmail
       });
     }
   };
@@ -111,8 +108,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
     if (password != this.state.password || validPassword != this.state.validPassword) {
       this.setState({
         password: password,
-        validPassword: validPassword,
-        loginNeedsValidation: true
+        validPassword: validPassword
       });
     }
   };
@@ -131,47 +127,37 @@ export class Login extends React.Component<LoginProps, LoginState> {
       });
       return;
     }
-
-    if (!this.state.loginNeedsValidation) this.props.navigation.navigate('UsersPage', {token: this.state.token});
-
-    if (validEmail != this.state.validEmail || validPassword != this.state.validPassword || this.state.loginNeedsValidation) {
-      if (validEmail && validPassword) {
-        this.setState({ isLoading: true });
-        let token = '';
-        try {
-          const result = await graphQLconsts.APOLLO_CLIENT_FOR_AUTHENTICATION.mutate({
-            variables: {
-              loginInput: {
-                "email": this.state.email,
-                "password": this.state.password
-              }
-            },
-            mutation: graphQLconsts.MUTATION_LOGIN_REQUEST
-          });
-          token = result.data.Login.token;
-          this.setState({
-            validEmail: validEmail,
-            validPassword: validPassword,
-            loginNeedsValidation: false,
-            error: undefined,
-            isLoading: false
-          });
-          this.props.navigation.navigate('UsersPage', {token: this.state.token});
-        } catch (error) {
-          this.setState({
-            validEmail: validEmail,
-            validPassword: validPassword,
-            loginNeedsValidation: true,
-            error: `${error.message}`,
-            isLoading: false
-          });
-        } finally {
-          this.storeToken(token);
-        }
+    
+    if (validEmail && validPassword) {
+      let token = '';
+      try {
+        const result = await client.mutate({
+          variables: {
+            loginInput: {
+              email: this.state.email,
+              password: this.state.password
+            }
+          },
+          mutation: MutationRequest
+        });
+        token = result.data.Login.token;
+        this.setState({
+          validEmail: validEmail,
+          validPassword: validPassword,
+          error: undefined
+        });
+        this.props.navigation.navigate('UserPage');
+        this.storeToken(token);
+      } catch (error) {
+        this.setState({
+          validEmail: validEmail,
+          validPassword: validPassword,
+          error: `${error.message}`
+        });
       }
     }
-  }
 
+  }
 }
 
 export default Login;
