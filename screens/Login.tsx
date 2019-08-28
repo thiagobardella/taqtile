@@ -5,14 +5,10 @@ import { Button } from '../components/Button';
 import { FormItem } from '../components/FormItem';
 import { gql } from 'apollo-boost';
 
-import ApolloClient from 'apollo-boost';
 import AsyncStorage from '@react-native-community/async-storage';
 import Spinner from 'react-native-loading-spinner-overlay';
 
-
-const client = new ApolloClient({
-  uri: 'https://tq-template-server-sample.herokuapp.com/graphql'
-});
+import * as ScreensConstants from './screeens.constants'
 
 interface LoginProps {
   navigation: any;
@@ -160,7 +156,6 @@ export class Login extends React.Component<LoginProps, LoginState> {
   }
 
   render() {
-
     const emailError =
       !this.state.validEmail
         ? "E-mail inválido! O e-mail deve estar no formato ###@###.com"
