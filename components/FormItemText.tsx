@@ -1,22 +1,24 @@
 import React from 'react';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { StyleSheet, TextInput, Text, View } from 'react-native';
+import * as constants from './components.constants'
+import { FormLabel } from './TitleText';
 
-export interface FormItemProps {
+export interface FormItemTextProps {
     label: string;
     error?: string;
     onChangeText?: (text: string) => void;
     shouldHideText: boolean
 }
 
-export class FormItem extends React.PureComponent<FormItemProps> {
+export class FormItemText extends React.PureComponent<FormItemTextProps> {
     render() {
         return (
-            <View style={styles.wrapper}>
-                <Text style={styles.formItemLabel}>{this.props.label}</Text>
-                <TextInput secureTextEntry={this.props.shouldHideText} onChangeText={this.props.onChangeText} style={styles.formItemTextInput} />
+            <View style={constants.COMPONENTS_STYLES.wrapper}>
+                <FormLabel>{this.props.label}</FormLabel>
+                <TextInput secureTextEntry={this.props.shouldHideText} onChangeText={this.props.onChangeText} style={styles.formItemInput} />
                 {this.props.error &&
-                    <Text style={styles.formItemError}>{this.props.error}</Text>
+                    <Text style={constants.COMPONENTS_STYLES.formItemError}>{this.props.error}</Text>
                 }
             </View>
         );
@@ -31,25 +33,13 @@ const styles = StyleSheet.create({
         paddingHorizontal: 30,
         paddingVertical: 20
     },
-    formItemLabel: {
-        color: 'blue',
-        fontWeight: 'bold',
-        fontSize: 20,
-        paddingVertical: 10,
-        marginLeft: 5
-    },
-    formItemTextInput: {
+    formItemInput: {
         width: '100%',
         color: 'black',
         borderColor: 'gray',
         borderRadius: 5,
         borderWidth: 2
     },
-    formItemError: {
-        flex: 1,
-        height: '100%',
-        color: 'red'
-    }
 });
 
-export default FormItem;
+export default FormItemText;

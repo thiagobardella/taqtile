@@ -1,19 +1,19 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { ScrollView, Text, View } from 'react-native';
 import { Button } from '../components/Button';
-import { FormItem } from '../components/FormItem';
-import { gql } from 'apollo-boost';
+import { FormItemText } from '../components/FormItemText';
 
 import AsyncStorage from '@react-native-community/async-storage';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { NavigationScreenProps } from 'react-navigation';
+import { NavigationParams, NavigationScreenProp, NavigationState } from 'react-navigation';
 
-
-import * as ScreensConstants from './screeens.constants'
+import * as constants from './screens.constants'
+import * as graphQLconsts from './graphQL.constants'
+import * as utils from './screens.utils'
+import { Title } from '../components/TitleText';
 
 interface LoginProps {
-  navigation: NavigationScreenProps;
+  navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
 export interface LoginState {
@@ -25,26 +25,6 @@ export interface LoginState {
   token: string;
   isLoading: boolean,
 }
-
-const PasswordMinLength = 7;
-const RegexPasswordMinLength = new RegExp(`.{${PasswordMinLength},}`);
-const RegexPasswordAtLeastADigit = new RegExp(".*\\d.*");
-const RegexPasswordAtLeastALetter = new RegExp(".*[a-zA-Z].*");
-const RegexEmailFormat = new RegExp("\\w+@\\w+.com$");
-
-const MutationRequest = gql`
-  mutation($loginInput: LoginInput!) {
-      Login(data: $loginInput) 
-      {
-        user {
-          name
-          cpf
-          email
-        }
-        token
-      }
-    }
-`;
 
 export class Login extends React.Component<LoginProps, LoginState> {
   constructor(props: LoginProps) {
@@ -59,6 +39,38 @@ export class Login extends React.Component<LoginProps, LoginState> {
       token: "",
       isLoading: false,
     };
+  }
+
+  render() {
+    const emailError =
+      !this.state.validEmail
+        ? "Invalid email! Your email must have the format ###@###.com"
+        : undefined;
+
+    const passwordError =
+      !this.state.validPassword
+        ? "Invalid password! Your password: \n * must contain at least 7 characters \n * should have at least 1 digit and 1 letter"
+        : undefined;
+
+    this.getToken();
+
+    return (
+      <ScrollView
+        contentInsetAdjustmentBehavior="automatic"
+        style={constants.SCREEN_STYLES.scrollView}>
+        <Title title='Bem-vindo à Taqtile!'/>
+        <View style={constants.SCREEN_STYLES.body}>
+          <Spinner
+            visible={this.state.isLoading}
+            textStyle={constants.SCREEN_STYLES.spinnerTextStyle}
+          />
+          <FormItemText label="E-mail" error={emailError} onChangeText={this.handleChangeEmail} shouldHideText={false} />
+          <FormItemText label="Senha" error={passwordError} onChangeText={this.handleChangePassword} shouldHideText={true} />
+          {this.state.error && <Text style={constants.SCREEN_STYLES.error}>{this.state.error}</Text>}
+          <Button label="Entrar" onPress={this.handleButtonPress} />
+        </View>
+      </ScrollView>
+    );
   }
 
   private storeToken = (token: string) => {
@@ -81,19 +93,9 @@ export class Login extends React.Component<LoginProps, LoginState> {
       }));
   }
 
-  private isValidEmail = (email: string) => {
-    return RegexEmailFormat.test(email);
-  }
-
-  private isValidPassword = (password: string) => {
-    return RegexPasswordMinLength.test(password)
-      && RegexPasswordAtLeastADigit.test(password)
-      && RegexPasswordAtLeastALetter.test(password);
-  }
-
   private handleChangeEmail = (email: string) => {
-    let validEmail = this.isValidEmail(email);
-    if (email !== this.state.email || validEmail !== this.state.validEmail) {
+    let validEmail = utils.isValidEmail(email);
+    if (email != this.state.email || validEmail != this.state.validEmail) {
       this.setState({
         email: email,
         validEmail: validEmail
@@ -102,8 +104,8 @@ export class Login extends React.Component<LoginProps, LoginState> {
   };
 
   private handleChangePassword = (password: string) => {
-    let validPassword = this.isValidPassword(password);
-    if (password !== this.state.password || validPassword !== this.state.validPassword) {
+    let validPassword = utils.isValidPassword(password);
+    if (password != this.state.password || validPassword != this.state.validPassword) {
       this.setState({
         password: password,
         validPassword: validPassword
@@ -115,8 +117,8 @@ export class Login extends React.Component<LoginProps, LoginState> {
     const email = this.state.email;
     const password = this.state.password;
 
-    let validEmail = this.isValidEmail(email);
-    let validPassword = this.isValidPassword(password);
+    let validEmail = utils.isValidEmail(email);
+    let validPassword = utils.isValidPassword(password);
 
     if (!validEmail || !validPassword) {
       this.setState({
@@ -156,69 +158,6 @@ export class Login extends React.Component<LoginProps, LoginState> {
     }
 
   }
-
-  render() {
-    const emailError =
-      !this.state.validEmail
-        ? "E-mail inválido! O e-mail deve estar no formato ###@###.com"
-        : undefined;
-
-    const passwordError =
-      !this.state.validPassword
-        ? "Senha inválida! Sua senha: \n * deve ter no mínimo 7 caracteres \n * e deve ter, no mínimo, 1 letra e 1 dígito"
-        : undefined;
-
-    this.getToken();
-
-    return (
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={styles.scrollView}>
-        <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Bem vindo(a) à Taqtile!</Text>
-        </View>
-        <View style={styles.body}>
-          <Spinner
-            visible={this.state.isLoading}
-            textStyle={styles.spinnerTextStyle}
-          />
-          <FormItem label="E-mail" error={emailError} onChangeText={this.handleChangeEmail} shouldHideText={false} />
-          <FormItem label="Senha" error={passwordError} onChangeText={this.handleChangePassword} shouldHideText={true} />
-          {this.state.error && <Text style={styles.error}>{this.state.error}</Text>}
-          <Button label="Entrar" onPress={this.handleButtonPress} />
-        </View>
-      </ScrollView>
-    );
-  }
 }
-
-const styles = StyleSheet.create({
-  spinnerTextStyle: {
-    color: '#FFF'
-  },
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionHeader: {
-    alignSelf: 'center',
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 30,
-    fontWeight: Colors.bold,
-    color: Colors.black,
-    marginBottom: 10
-  },
-  error: {
-    alignSelf: 'center',
-    fontSize: 25,
-    fontWeight: Colors.bold,
-    color: 'red'
-  }
-});
 
 export default Login;
