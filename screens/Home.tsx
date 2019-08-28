@@ -12,7 +12,7 @@ const Home = (props) => {
     <Fragment>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
-        <Login navigation={props.navigation}/>
+        <Login navigator={props.navigation}/>
       </SafeAreaView>
     </Fragment>
   );

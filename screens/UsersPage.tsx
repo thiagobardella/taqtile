@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '../components/Button';
 import { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -9,7 +10,7 @@ import { NavigationScreenProps } from 'react-navigation';
 
 
 interface UsersPageProps {
-  navigation: NavigationScreenProps;
+  navigation: any;
 }
 
 interface UsersPageState {
@@ -116,6 +117,10 @@ export class UsersPage extends React.Component<UsersPageProps, UsersPageState> {
     </View>
   )
 
+  private handleButtonPress = () => {
+    this.props.navigation.navigate('NewUserPage');
+  }
+
   render() {
     return (
       <ScrollView
@@ -124,6 +129,7 @@ export class UsersPage extends React.Component<UsersPageProps, UsersPageState> {
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Lista de usuários</Text>
         </View>
+        <Button label="Novo usuário" onPress={this.handleButtonPress} />
         <View style={styles.body}>
           <Spinner visible={this.state.isLoading}/>
           <FlatList

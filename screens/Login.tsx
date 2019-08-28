@@ -9,11 +9,10 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { NavigationScreenProps } from 'react-navigation';
 
-
 import * as ScreensConstants from './screeens.constants'
 
 interface LoginProps {
-  navigation: NavigationScreenProps;
+  navigator: any;
 }
 
 export interface LoginState {
@@ -130,7 +129,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
       return;
     }
 
-    if (!this.state.loginNeedsValidation) this.props.navigation.navigate('UsersPage', {token: this.state.token});
+    if (!this.state.loginNeedsValidation) this.props.navigator.navigate('UsersPage', {token: this.state.token});
 
     if (validEmail != this.state.validEmail || validPassword != this.state.validPassword || this.state.loginNeedsValidation) {
       if (validEmail && validPassword) {
@@ -154,7 +153,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
             error: undefined,
             isLoading: false
           });
-          this.props.navigation.navigate('UsersPage', {token: this.state.token});
+          this.props.navigator.navigate('UsersPage', {token: this.state.token});
         } catch (error) {
           this.setState({
             validEmail: validEmail,
