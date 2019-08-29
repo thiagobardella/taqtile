@@ -64,7 +64,7 @@ export class NewUserPage extends React.Component<NewUserPageProps, NewUserPageSt
         <FormItemText label="Senha" onChangeText={this.handleChangeField('password')} shouldHideText={true}
           error={(!this.isFieldValid('password') ? constants.INVALID_PASSWORD_ERROR : undefined)} />
         <FormItemPicker label="Perfil" options={constants.USER_ROLES} handleValueChange={this.handleChangeField('role')} />
-        {/* <Button label="Confirmar" onPress={this.handleSubmitButtonPress} /> */}
+        <Button label="Confirmar" onPress={this.handleSubmitButtonPress} />
       </Form>
     );
   }
