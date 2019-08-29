@@ -22,9 +22,9 @@ export interface LoginState {
   password: string;
   validEmail: boolean;
   validPassword: boolean;
-  error?: string,
+  error?: string;
   token: string;
-  isLoading: boolean,
+  isLoading: boolean;
 }
 
 export class Login extends React.Component<LoginProps, LoginState> {
@@ -38,7 +38,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
       validPassword: true,
       error: undefined,
       token: "",
-      isLoading: false,
+      isLoading: false
     };
   }
 

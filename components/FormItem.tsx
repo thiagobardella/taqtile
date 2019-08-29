@@ -21,12 +21,11 @@ const FORM_ITEM_STYLES = StyleSheet.create({
   }
 });
 
-//TODO (remove this any)
 //TODO (how to allow only one item??)
 interface FormItemProps {
   label: string,
   error?: string,
-  children: any
+  children: Element
 }
 
 export const FormItem: React.FC<FormItemProps> = (props: FormItemProps) => (

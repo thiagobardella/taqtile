@@ -1,8 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
-export const REQUIRED_FIELD_ERROR = "Campo obrigatório!"
-
 export const COMPONENTS_STYLES = StyleSheet.create({
     formItemLabel: {
         color: 'blue',

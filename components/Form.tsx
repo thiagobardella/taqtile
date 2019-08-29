@@ -20,13 +20,12 @@ const FORM_STYLES = StyleSheet.create({
   }
 });
 
-//TODO (remove this any)
 //TODO (should I allow only FormItems as children?)
 interface FormProps {
   title: string;
   isLoading: boolean;
   error?: string;
-  children: any;
+  children: Element;
 }
 
 export const Form: React.FC<FormProps> = (props: FormProps) => (
@@ -36,9 +35,7 @@ export const Form: React.FC<FormProps> = (props: FormProps) => (
     <Title>{props.title}</Title>
     <View style={FORM_STYLES.body}>
       <Spinner visible={props.isLoading} />
-      {props.error &&
-        (<Text style={FORM_STYLES.error}>{props.error}</Text>)
-      }
+      {props.error && <Text style={FORM_STYLES.error}>{props.error}</Text>}
       {props.children}
     </View>
   </ScrollView>
