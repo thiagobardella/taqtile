@@ -36,3 +36,11 @@ export const MUTATION_LOGIN_REQUEST = gql`
       }
     }
 `;
+
+export const MUTATION_CREATE_USER_REQUEST = gql`
+  mutation($userInput: UserInput) {
+    UserCreate(data: $userInput) {
+      id
+    }
+  }
+`;

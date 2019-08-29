@@ -17,16 +17,16 @@ const TITLE_TEXT_STYLES = StyleSheet.create({
 });
 
 interface TitleProps {
-    title: string;
+    children: string;
 }
 
 export const Title: React.FC<TitleProps> = (props: TitleProps) => {
     return (
         <View style={TITLE_TEXT_STYLES.sectionHeader}>
-            <Text style={TITLE_TEXT_STYLES.sectionTitle}>{props.title}</Text>
+            <Text style={TITLE_TEXT_STYLES.sectionTitle}>{props.children}</Text>
         </View>
-    ); 
-} 
+    );
+}
 
 const FORM_LABEL_STYLES = StyleSheet.create({
     formItemLabel: {

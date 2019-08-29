@@ -9,16 +9,8 @@ export const REGEX_EMAIL_FORMAT = new RegExp("\\w+@\\w+.com$");
 
 export const USER_ROLES = ["user", "admin"]
 
+//TODO (remove this const)
 export const SCREEN_STYLES = StyleSheet.create({
-  spinnerTextStyle: {
-    color: '#FFF'
-  },
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
   btnText: {
     color: 'white',
     fontSize: 15,

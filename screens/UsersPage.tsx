@@ -9,6 +9,7 @@ import * as utils from './screens.utils'
 import Button from '../components/Button';
 import { NavigationParams, NavigationScreenProp, NavigationState } from 'react-navigation';
 import { Title } from '../components/TitleText';
+import { Form } from '../components/Form';
 
 interface UsersPageProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -68,22 +69,32 @@ export class UsersPage extends React.Component<UsersPageProps, UsersPageState> {
 
   render() {
     return (
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={constants.SCREEN_STYLES.scrollView}>
-        <Title title='Lista de usuários' />
-        <Button label="Novo usuário" onPress={this.handleNewUserButtonPress} />
-        <View style={constants.SCREEN_STYLES.body}>
-          <Spinner visible={this.state.isLoading} />
-          <FlatList
+      // <ScrollView
+      //   contentInsetAdjustmentBehavior="automatic"
+      //   style={constants.SCREEN_STYLES.scrollView}>
+      //   <Title title='Lista de usuários' />
+      //   <Button label="Novo usuário" onPress={this.handleNewUserButtonPress} />
+      //   <View style={constants.SCREEN_STYLES.body}>
+      //     <Spinner visible={this.state.isLoading} />
+      //     <FlatList
+      //       style={{ width: '100%' }}
+      //       data={this.state.users}
+      //       renderItem={this.renderItem}
+      //       ItemSeparatorComponent={() => <View style={constants.SCREEN_STYLES.separator} />}
+      //       ListFooterComponent={this.renderFooter.bind(this)}
+      //     />
+      //   </View>
+      // </ScrollView>
+      <Form isLoading={this.state.isLoading} title='Lista de usuários'>
+        <Button label='Novo usuário' onPress={this.handleNewUserButtonPress} />
+        <FlatList
             style={{ width: '100%' }}
             data={this.state.users}
             renderItem={this.renderItem}
             ItemSeparatorComponent={() => <View style={constants.SCREEN_STYLES.separator} />}
             ListFooterComponent={this.renderFooter.bind(this)}
           />
-        </View>
-      </ScrollView>
+      </Form>
     );
   }
 
@@ -91,7 +102,7 @@ export class UsersPage extends React.Component<UsersPageProps, UsersPageState> {
     this.props.navigation.navigate('NewUserPage');
   }
 
-  private renderFooter() {
+  private renderFooter = () => {
     return (
       <View style={constants.SCREEN_STYLES.footer}>
         <TouchableOpacity

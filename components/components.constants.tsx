@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
-
+export const REQUIRED_FIELD_ERROR = "Campo obrigatório!"
 
 export const COMPONENTS_STYLES = StyleSheet.create({
     formItemLabel: {
@@ -39,11 +39,5 @@ export const COMPONENTS_STYLES = StyleSheet.create({
         color: Colors.white,
         fontWeight: 'bold',
         fontSize: 20,
-    },
-    picker: {
-        width: '100%',
-        color: 'black',
-        fontWeight: 'bold',
-        fontSize: 20
     }
 });

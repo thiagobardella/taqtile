@@ -11,6 +11,7 @@ import * as constants from './screens.constants'
 import * as graphQLconsts from './graphQL.constants'
 import * as utils from './screens.utils'
 import { Title } from '../components/TitleText';
+import { Form } from '../components/Form';
 
 interface LoginProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -55,21 +56,26 @@ export class Login extends React.Component<LoginProps, LoginState> {
     this.getToken();
 
     return (
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={constants.SCREEN_STYLES.scrollView}>
-        <Title title='Bem-vindo à Taqtile!'/>
-        <View style={constants.SCREEN_STYLES.body}>
-          <Spinner
-            visible={this.state.isLoading}
-            textStyle={constants.SCREEN_STYLES.spinnerTextStyle}
-          />
-          <FormItemText label="E-mail" error={emailError} onChangeText={this.handleChangeEmail} shouldHideText={false} />
-          <FormItemText label="Senha" error={passwordError} onChangeText={this.handleChangePassword} shouldHideText={true} />
-          {this.state.error && <Text style={constants.SCREEN_STYLES.error}>{this.state.error}</Text>}
-          <Button label="Entrar" onPress={this.handleButtonPress} />
-        </View>
-      </ScrollView>
+      // <ScrollView
+      //   contentInsetAdjustmentBehavior="automatic"
+      //   style={constants.SCREEN_STYLES.scrollView}>
+      //   <Title>Bem-vindo à Taqtile!</Title>
+      //   <View style={constants.SCREEN_STYLES.body}>
+      //     <Spinner
+      //       visible={this.state.isLoading}
+      //       textStyle={constants.SCREEN_STYLES.spinnerTextStyle}
+      //     />
+      //     <FormItemText label="E-mail" error={emailError} onChangeText={this.handleChangeEmail} shouldHideText={false} />
+      //     <FormItemText label="Senha" error={passwordError} onChangeText={this.handleChangePassword} shouldHideText={true} />
+      //     {this.state.error && <Text style={constants.SCREEN_STYLES.error}>{this.state.error}</Text>}
+      //     <Button label="Entrar" onPress={this.handleButtonPress} />
+      //   </View>
+      // </ScrollView>
+      <Form isLoading={this.state.isLoading} title='Bem-vindo à Taqtile!' error={this.state.error}>
+        <FormItemText label="E-mail" error={emailError} onChangeText={this.handleChangeEmail} shouldHideText={false} />
+        <FormItemText label="Senha" error={passwordError} onChangeText={this.handleChangePassword} shouldHideText={true} />
+        <Button label="Entrar" onPress={this.handleButtonPress} />
+      </Form>
     );
   }
 
