@@ -7,6 +7,10 @@ export const REGEX_PASSWORD_AT_LEAST_1_DIGIT = new RegExp(".*\\d.*");
 export const REGEX_PASSWORD_AT_LEAST_1_LETTER = new RegExp(".*[a-zA-Z].*");
 export const REGEX_EMAIL_FORMAT = new RegExp("\\w+@\\w+.com$");
 
+export const REQUIRED_FIELD_ERROR = "Campo obrigatório!";
+export const INVALID_EMAIL_ERROR = "E-mail inválido! O e-mail deve estar no formato ###@###.com";
+export const INVALID_PASSWORD_ERROR = "Senha inválida! Sua senha: \n * deve ter no mínimo 7 caracteres \n * e deve ter, no mínimo, 1 letra e 1 dígito"
+
 export const USER_ROLES = ["user", "admin"]
 
 //TODO (remove this const)
