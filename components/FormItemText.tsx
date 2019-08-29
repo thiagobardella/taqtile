@@ -1,8 +1,6 @@
 import React from 'react';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { StyleSheet, TextInput, Text, View } from 'react-native';
-import * as constants from './components.constants'
-import { FormLabel } from './TitleText';
 import { FormItem } from './FormItem';
 
 export interface FormItemTextProps {
@@ -19,13 +17,6 @@ export class FormItemText extends React.PureComponent<FormItemTextProps> {
 
   render() {
     return (
-      // <View style={constants.COMPONENTS_STYLES.wrapper}>
-      //     <FormLabel>{this.props.label}</FormLabel>
-      //     <TextInput secureTextEntry={this.props.shouldHideText} onChangeText={this.props.onChangeText} style={styles.formItemInput} />
-      //     {this.props.error &&
-      //         <Text style={constants.COMPONENTS_STYLES.formItemError}>{this.props.error}</Text>
-      //     }
-      // </View>
       <FormItem label={this.props.label} error={this.props.error}>
         <TextInput secureTextEntry={this.props.shouldHideText} onChangeText={this.props.onChangeText} style={styles.formItemInput} />
       </FormItem>

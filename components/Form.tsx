@@ -4,6 +4,8 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { Title } from './TitleText';
 import Spinner from 'react-native-loading-spinner-overlay';
+import { FormItemProps, FormItem } from './FormItem';
+import Button from './Button';
 
 const FORM_STYLES = StyleSheet.create({
   scrollView: {
@@ -19,6 +21,8 @@ const FORM_STYLES = StyleSheet.create({
     color: 'red'
   }
 });
+
+
 
 //TODO (should I allow only FormItems as children?)
 interface FormProps {

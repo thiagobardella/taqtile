@@ -22,7 +22,7 @@ const FORM_ITEM_STYLES = StyleSheet.create({
 });
 
 //TODO (how to allow only one item??)
-interface FormItemProps {
+export interface FormItemProps {
   label: string,
   error?: string,
   children: Element

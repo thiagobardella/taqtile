@@ -30,16 +30,6 @@ export interface FormItemPickerProps {
 export class FormItemPicker extends React.PureComponent<FormItemPickerProps> {
   render() {
     return (
-      // <View style={constants.COMPONENTS_STYLES.wrapper}>
-      //   <FormLabel>{this.props.label}</FormLabel>
-      //   <TouchableOpacity style={FORM_ITEM_PICKER_STYLES.wrapper}>
-      //     <Picker style={constants.COMPONENTS_STYLES.picker}>
-      //       {this.props.options.map(option => {
-      //         return <Picker.Item label={option} value={option} />;
-      //       })}
-      //     </Picker>
-      //   </TouchableOpacity>
-      // </View>
       <FormItem label={this.props.label}>
         <TouchableOpacity style={FORM_ITEM_PICKER_STYLES.wrapper}>
           <Picker onValueChange={this.props.handleValueChange} style={FORM_ITEM_PICKER_STYLES.picker}>
