@@ -11,6 +11,7 @@ import * as constants from './screens.constants'
 import * as graphQLconsts from './graphQL.constants'
 import * as utils from './screens.utils'
 import { Title } from '../components/TitleText';
+import { Form } from '../components/Form';
 
 interface LoginProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -21,9 +22,9 @@ export interface LoginState {
   password: string;
   validEmail: boolean;
   validPassword: boolean;
-  error?: string,
+  error?: string;
   token: string;
-  isLoading: boolean,
+  isLoading: boolean;
 }
 
 export class Login extends React.Component<LoginProps, LoginState> {
@@ -37,39 +38,29 @@ export class Login extends React.Component<LoginProps, LoginState> {
       validPassword: true,
       error: undefined,
       token: "",
-      isLoading: false,
+      isLoading: false
     };
   }
 
   render() {
     const emailError =
       !this.state.validEmail
-        ? "Invalid email! Your email must have the format ###@###.com"
+        ? "E-mail inválido! O e-mail deve estar no formato ###@###.com"
         : undefined;
 
     const passwordError =
       !this.state.validPassword
-        ? "Invalid password! Your password: \n * must contain at least 7 characters \n * should have at least 1 digit and 1 letter"
+        ? "Senha inválida! Sua senha: \n * deve ter no mínimo 7 caracteres \n * e deve ter, no mínimo, 1 letra e 1 dígito"
         : undefined;
 
     this.getToken();
 
     return (
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={constants.SCREEN_STYLES.scrollView}>
-        <Title title='Bem-vindo à Taqtile!'/>
-        <View style={constants.SCREEN_STYLES.body}>
-          <Spinner
-            visible={this.state.isLoading}
-            textStyle={constants.SCREEN_STYLES.spinnerTextStyle}
-          />
-          <FormItemText label="E-mail" error={emailError} onChangeText={this.handleChangeEmail} shouldHideText={false} />
-          <FormItemText label="Senha" error={passwordError} onChangeText={this.handleChangePassword} shouldHideText={true} />
-          {this.state.error && <Text style={constants.SCREEN_STYLES.error}>{this.state.error}</Text>}
-          <Button label="Entrar" onPress={this.handleButtonPress} />
-        </View>
-      </ScrollView>
+      <Form isLoading={this.state.isLoading} title='Bem-vindo à Taqtile!' error={this.state.error}>
+        <FormItemText label="E-mail" error={emailError} onChangeText={this.handleChangeEmail} shouldHideText={false} />
+        <FormItemText label="Senha" error={passwordError} onChangeText={this.handleChangePassword} shouldHideText={true} />
+        <Button label="Entrar" onPress={this.handleButtonPress} />
+      </Form>
     );
   }
 
@@ -127,32 +118,36 @@ export class Login extends React.Component<LoginProps, LoginState> {
       });
       return;
     }
-    
+
     if (validEmail && validPassword) {
       let token = '';
       try {
-        const result = await client.mutate({
+        this.setState({ isLoading: true });
+
+        const result = await graphQLconsts.APOLLO_CLIENT_FOR_AUTHENTICATION.mutate({
           variables: {
             loginInput: {
               email: this.state.email,
               password: this.state.password
             }
           },
-          mutation: MutationRequest
+          mutation: graphQLconsts.MUTATION_LOGIN_REQUEST
         });
         token = result.data.Login.token;
         this.setState({
           validEmail: validEmail,
           validPassword: validPassword,
-          error: undefined
+          error: undefined,
+          isLoading: false
         });
-        this.props.navigation.navigate('UserPage');
+        this.props.navigation.navigate('UsersPage');
         this.storeToken(token);
       } catch (error) {
         this.setState({
           validEmail: validEmail,
           validPassword: validPassword,
-          error: `${error.message}`
+          error: `${error.message}`,
+          isLoading: false
         });
       }
     }
