@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { H1, TitleWrapperStyled } from './titletext.component.style';
+import { H1, TitleWrapperStyled } from './title-text.component.style';
 
 interface TitleProps {
     children: string;

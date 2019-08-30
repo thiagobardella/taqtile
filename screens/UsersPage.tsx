@@ -8,7 +8,7 @@ import * as graphQLconsts from './graphQL.constants'
 import * as utils from './screens.utils'
 import Button from '../components/button';
 import { NavigationParams, NavigationScreenProp, NavigationState } from 'react-navigation';
-import { Title } from '../components/titletext';
+import { Title } from '../components/title-text';
 import { Form } from '../components/form';
 
 interface UsersPageProps {

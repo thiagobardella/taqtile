@@ -10,7 +10,7 @@ import { NavigationParams, NavigationScreenProp, NavigationState } from 'react-n
 import * as constants from './screens.constants'
 import * as graphQLconsts from './graphQL.constants'
 import * as utils from './screens.utils'
-import { Title } from '../components/titletext';
+import { Title } from '../components/title-text';
 import { Form } from '../components/form';
 
 interface LoginProps {

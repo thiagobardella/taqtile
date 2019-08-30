@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { Title } from './titletext';
+import { Title } from './title-text';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { FormErrorTextStyled } from './form.component.style';
 
