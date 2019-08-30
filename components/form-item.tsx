@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FormItemErrorMessageStyled, FormItemLabelValidStyled, FormItemWrapperStyled, FormItemLabelInvalidStyled } from "./form-item.component.style";
+import { FormItemErrorMessageStyled, FormItemLabelStyled, FormItemWrapperStyled } from "./form-item.component.style";
 
 export interface FormItemProps {
   label: string,
@@ -9,10 +9,7 @@ export interface FormItemProps {
 
 export const FormItem: React.FC<FormItemProps> = (props: FormItemProps) => (
   <FormItemWrapperStyled >
-    {props.error
-      ? <FormItemLabelInvalidStyled >{props.label}</FormItemLabelInvalidStyled>
-      : <FormItemLabelValidStyled >{props.label}</FormItemLabelValidStyled>
-    }
+    <FormItemLabelStyled errorMode={Boolean(props.error)}>{props.label}</FormItemLabelStyled>
     {props.children}
     {props.error &&
       <FormItemErrorMessageStyled >{props.error}</FormItemErrorMessageStyled>

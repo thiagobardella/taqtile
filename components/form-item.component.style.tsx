@@ -18,19 +18,13 @@ export const FormItemErrorMessageStyled = styled.Text`
   height: 100%;
 `;
 
-export const FormItemLabelValidStyled = styled.Text`
-  alignSelf: flex-start;
-  color: gray;
-  fontWeight: normal;
-  fontSize: 12;
-  marginBottom: 12;
-  paddingVertical: 10;
-  marginLeft: 5;
-`;
+export interface FormItemLabelProps {
+  errorMode: boolean
+}
 
-export const FormItemLabelInvalidStyled = styled.Text`
+export const FormItemLabelStyled = styled.Text<FormItemLabelProps>`
   alignSelf: flex-start;
-  color: red;
+  color: ${props => (props.errorMode ? 'red' : 'gray')};
   fontWeight: normal;
   fontSize: 12;
   marginBottom: 12;

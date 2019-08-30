@@ -1,16 +1,12 @@
 import React from 'react';
-import { ScrollView, Text, View } from 'react-native';
 import { Button } from '../components/button';
 import { FormItemText } from '../components/form-item-text';
 
 import AsyncStorage from '@react-native-community/async-storage';
-import Spinner from 'react-native-loading-spinner-overlay';
 import { NavigationParams, NavigationScreenProp, NavigationState } from 'react-navigation';
 
-import * as constants from './screens.constants'
 import * as graphQLconsts from './graphQL.constants'
 import * as utils from './screens.utils'
-import { Title } from '../components/title-text';
 import { Form } from '../components/form';
 
 interface LoginProps {

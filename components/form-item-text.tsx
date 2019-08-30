@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormItem } from './form-item';
-import {FormItemTextInputStyled } from './form-item-text.component.style';
+import { FormItemTextInputStyled } from './form-item-text.component.style';
 
 export interface FormItemTextProps {
   label: string;
