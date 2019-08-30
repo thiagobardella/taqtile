@@ -1,26 +1,7 @@
 import React from 'react';
-import { TouchableOpacity, Picker, Text, View, StyleSheet } from 'react-native';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { Picker } from 'react-native';
 import { FormItem } from './form-item';
-
-const FORM_ITEM_PICKER_STYLES = StyleSheet.create({
-  wrapper: {
-    width: '100%',
-    alignItems: 'center',
-    alignSelf: 'center',
-    backgroundColor: Colors.white,
-    borderColor: 'gray',
-    borderWidth: 2,
-    borderRadius: 5,
-    paddingVertical: 5
-  },
-  picker: {
-      width: '100%',
-      color: 'black',
-      fontWeight: 'bold',
-      fontSize: 20
-  }
-});
+import { PickerStyled, PickerTouchableOpacityStyled } from './form-item-picker.component.style';
 
 export interface FormItemPickerProps {
   label: string;
@@ -31,13 +12,13 @@ export class FormItemPicker extends React.PureComponent<FormItemPickerProps> {
   render() {
     return (
       <FormItem label={this.props.label}>
-        <TouchableOpacity style={FORM_ITEM_PICKER_STYLES.wrapper}>
-          <Picker onValueChange={this.props.handleValueChange} style={FORM_ITEM_PICKER_STYLES.picker}>
+        <PickerTouchableOpacityStyled >
+          <PickerStyled onValueChange={this.props.handleValueChange} >
             {this.props.options.map(option => {
               return <Picker.Item label={option} value={option} />;
             })}
-          </Picker>
-        </TouchableOpacity>
+          </PickerStyled>
+        </PickerTouchableOpacityStyled>
       </FormItem >
     );
   }

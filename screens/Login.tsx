@@ -7,6 +7,7 @@ import { NavigationParams, NavigationScreenProp, NavigationState } from 'react-n
 
 import * as graphQLconsts from './graphQL.constants'
 import * as utils from './screens.utils'
+import * as constants from './screens.constants'
 import { Form } from '../components/form';
 
 interface LoginProps {
@@ -32,7 +33,6 @@ export class Login extends React.Component<LoginProps, LoginState> {
       password: "",
       validEmail: true,
       validPassword: true,
-      error: undefined,
       token: "",
       isLoading: false
     };
@@ -41,20 +41,20 @@ export class Login extends React.Component<LoginProps, LoginState> {
   render() {
     const emailError =
       !this.state.validEmail
-        ? "E-mail inválido! O e-mail deve estar no formato ###@###.com"
+        ? constants.INVALID_EMAIL_ERROR
         : undefined;
 
     const passwordError =
       !this.state.validPassword
-        ? "Senha inválida! Sua senha: \n * deve ter no mínimo 7 caracteres \n * e deve ter, no mínimo, 1 letra e 1 dígito"
+        ? constants.INVALID_PASSWORD_ERROR
         : undefined;
 
     this.getToken();
 
     return (
       <Form isLoading={this.state.isLoading} title='Bem-vindo à Taqtile!' error={this.state.error}>
-        <FormItemText label="E-mail" error={emailError} onChangeText={this.handleChangeEmail} shouldHideText={false} />
-        <FormItemText label="Senha" error={passwordError} onChangeText={this.handleChangePassword} shouldHideText={true} />
+        <FormItemText label="E-mail" errorMessage={emailError} onChangeText={this.handleChangeEmail} shouldHideText={false} />
+        <FormItemText label="Senha" errorMessage={passwordError} onChangeText={this.handleChangePassword} shouldHideText={true} />
         <Button label="Entrar" onPress={this.handleButtonPress} />
       </Form>
     );

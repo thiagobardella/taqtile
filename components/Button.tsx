@@ -1,6 +1,4 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import * as constants from './components.constants'
 import { ButtonTextStyled, ButtonTouchableOpacityStyled, ButtonViewWrapperStyled } from './button.component.style';
 
 export interface ButtonProps {
