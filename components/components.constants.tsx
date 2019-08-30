@@ -13,29 +13,5 @@ export const COMPONENTS_STYLES = StyleSheet.create({
         flex: 1,
         height: '100%',
         color: 'red'
-    },
-    wrapper: {
-        width: '100%',
-        alignItems: 'center',
-        alignSelf: 'center',
-        backgroundColor: Colors.white,
-        paddingHorizontal: 30,
-        paddingVertical: 20
-    },
-    button: {
-        width: '100%',
-        alignItems: 'center',
-        alignSelf: 'center',
-        backgroundColor: 'blue',
-        borderColor: Colors.black,
-        borderWidth: 2,
-        borderRadius: 5,
-        paddingVertical: 10,
-        margin: 30
-    },
-    buttonText: {
-        color: Colors.white,
-        fontWeight: 'bold',
-        fontSize: 20,
     }
 });

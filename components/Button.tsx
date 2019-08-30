@@ -1,22 +1,23 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import * as constants from './components.constants'
+import { ButtonTextStyled, ButtonTouchableOpacityStyled, ButtonViewWrapperStyled } from './button.component.style';
 
 export interface ButtonProps {
-    label: string;
-    onPress: () => void;
+  label: string;
+  onPress: () => void;
 }
 
 export class Button extends React.PureComponent<ButtonProps> {
-    render() {
-        return (
-            <View style={constants.COMPONENTS_STYLES.wrapper}>
-                <TouchableOpacity style={constants.COMPONENTS_STYLES.button} onPress={this.props.onPress}>
-                    <Text style={constants.COMPONENTS_STYLES.buttonText}>{this.props.label}</Text>
-                </TouchableOpacity>
-            </View>
-        );
-    }
+  render() {
+    return (
+      <ButtonViewWrapperStyled >
+        <ButtonTouchableOpacityStyled onPress={this.props.onPress}>
+          <ButtonTextStyled >{this.props.label}</ButtonTextStyled>
+        </ButtonTouchableOpacityStyled>
+      </ButtonViewWrapperStyled>
+    );
+  }
 }
 
 export default Button;

@@ -1,15 +1,13 @@
 import React from 'react';
-import { FlatList, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import ApolloClient from 'apollo-boost';
-import Spinner from 'react-native-loading-spinner-overlay';
 import * as constants from './screens.constants'
 import * as graphQLconsts from './graphQL.constants'
 import * as utils from './screens.utils'
-import Button from '../components/Button';
+import Button from '../components/button';
 import { NavigationParams, NavigationScreenProp, NavigationState } from 'react-navigation';
-import { Title } from '../components/TitleText';
-import { Form } from '../components/Form';
+import { Form } from '../components/form';
 
 interface UsersPageProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;

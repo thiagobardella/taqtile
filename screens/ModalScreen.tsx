@@ -1,8 +1,6 @@
 import * as React from 'react';
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import Modal from "react-native-modal";
-import { FormLabel } from '../components/TitleText';
-
 
 const MODAL_TEXT_STYLES = StyleSheet.create({
   modal: {
@@ -25,7 +23,7 @@ interface TitleProps {
 export const ModalScreen: React.FC<TitleProps> = (props: TitleProps) => {
   return (
     <Modal style={MODAL_TEXT_STYLES.modal} isVisible={props.isVisible} onBackdropPress={props.onBackDropPress}>
-      <FormLabel>{props.label}</FormLabel>
+      <Text>{props.label}</Text>
     </Modal>
   );
 }

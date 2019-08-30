@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import {
   SafeAreaView,
-  StatusBar
+  StatusBar,
+  Text
 } from 'react-native';
 
 import { Login } from './Login';

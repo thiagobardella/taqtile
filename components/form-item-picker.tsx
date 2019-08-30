@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Picker, Text, View, StyleSheet } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { FormItem } from './FormItem';
+import { FormItem } from './form-item';
 
 const FORM_ITEM_PICKER_STYLES = StyleSheet.create({
   wrapper: {
