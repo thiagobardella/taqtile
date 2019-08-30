@@ -66,15 +66,15 @@ export class NewUserPage extends React.Component<NewUserPageProps, NewUserPageSt
       <Form isLoading={this.state.isLoading} title='Cadastro de usuário' error={this.state.error}>
         <ModalScreen label='Usuário criado com sucesso' isVisible={this.state.modalVisible} onBackDropPress={this.toggleModal} />
         <FormItemText label="Nome" onChangeText={this.handleChangeName} shouldHideText={false}
-          error={(!this.state.validName ? constants.REQUIRED_FIELD_ERROR : undefined)} />
+          errorMessage={(!this.state.validName ? constants.REQUIRED_FIELD_ERROR : undefined)} />
         <FormItemText label="E-mail" onChangeText={this.handleChangeEmail} shouldHideText={false}
-          error={(!this.state.validEmail ? constants.INVALID_EMAIL_ERROR : undefined)} />
+          errorMessage={(!this.state.validEmail ? constants.INVALID_EMAIL_ERROR : undefined)} />
         <FormItemText label="CPF" onChangeText={this.handleChangeCPF} shouldHideText={false}
-          error={(!this.state.validCPF ? constants.INVALID_CPF_ERROR : undefined)} />
+          errorMessage={(!this.state.validCPF ? constants.INVALID_CPF_ERROR : undefined)} />
         <FormItemText label="Data de Nascimento" onChangeText={this.handleChangeBirthDate} shouldHideText={false}
-          error={(!this.state.validBirthDate ? constants.INVALID_DATE_ERROR : undefined)} />
+          errorMessage={(!this.state.validBirthDate ? constants.INVALID_DATE_ERROR : undefined)} />
         <FormItemText label="Senha" onChangeText={this.handleChangePassword} shouldHideText={true}
-          error={(!this.state.validPassword ? constants.INVALID_PASSWORD_ERROR : undefined)} />
+          errorMessage={(!this.state.validPassword ? constants.INVALID_PASSWORD_ERROR : undefined)} />
         <FormItemPicker label="Perfil" options={constants.USER_ROLES} handleValueChange={this.handleChangeRole} />
         <Button label="Confirmar" onPress={this.handleSubmitButtonPress} />
       </Form>

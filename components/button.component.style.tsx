@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import Button from './button';
 
 export const ButtonTextStyled = styled.Text`
   fontSize: 16;
