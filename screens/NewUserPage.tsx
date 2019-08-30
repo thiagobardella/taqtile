@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Button } from '../components/Button';
-import { FormItemText } from '../components/FormItemText';
+import { Button } from '../components/button';
+import { FormItemText } from '../components/form-item-text';
 import * as constants from './screens.constants'
 import * as graphQLconsts from './graphQL.constants'
 import * as utils from './screens.utils'
-import FormItemPicker from '../components/FormItemPicker';
-import { Form } from '../components/Form';
+import FormItemPicker from '../components/form-item-picker';
+import { Form } from '../components/form';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
