@@ -7,7 +7,7 @@ export const PickerStyled = styled.Picker`
   fontSize: 20;
 `;
 
-export const ButtonTouchableOpacityStyled = styled.TouchableOpacity`
+export const PickerTouchableOpacityStyled = styled.TouchableOpacity`
   width: 100%;
   alignItems: center;
   alignSelf: center;
